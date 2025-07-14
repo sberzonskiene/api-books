@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 @font-face {
-    font-family: Magnolia;
+    font-family: Mangolia;
     src: url(./Mangolia-2vvjw.ttf);
 }
 
@@ -51,11 +51,11 @@ tbody tr:hover {
     background-color: #ccc;
 }
 h1 {
-    font-family: Magnolia;
+    font-family: Mangolia;
     font-size: 5rem;
 }
 footer {
-    font-family: Magnolia;
+    font-family: Mangolia;
     font-size: 2rem; 
 }
 /* Loader */
@@ -65,11 +65,10 @@ footer {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-family: Magnolia;
+    font-family: Mangolia;
     font-size: 4rem;
     display: none;
 }
-
 #loader.show {
     display: block;
 }
