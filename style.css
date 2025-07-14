@@ -3,6 +3,10 @@
     padding: 0;
     box-sizing: border-box;
 }
+@font-face {
+    font-family: Magnolia;
+    src: url(./Mangolia-2vvjw.ttf);
+}
 
 body {
     background-color:#ccc;
@@ -11,7 +15,7 @@ body {
 
 header,
 footer {
-    padding: 4rem;
+    padding: 3rem;
     text-align: center;
 }
 
@@ -45,4 +49,30 @@ tbody tr {
 }
 tbody tr:hover {
     background-color: #ccc;
+}
+h1 {
+    font-family: Magnolia;
+    font-size: 5rem;
+}
+footer {
+    font-family: Magnolia;
+    font-size: 2rem; 
+}
+/* Loader */
+
+#loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: Magnolia;
+    font-size: 4rem;
+    display: none;
+}
+
+#loader.show {
+    display: block;
+}
+.hide {
+    display: none;
 }
