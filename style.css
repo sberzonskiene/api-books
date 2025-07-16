@@ -75,3 +75,7 @@ footer {
 .hide {
     display: none;
 }
+
+#villains-row td {
+    background: rgb(241, 144, 134);
+}

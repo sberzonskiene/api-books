@@ -27,11 +27,28 @@ fetch('https://stephen-king-api.onrender.com/api/books')
 })
 .catch((error) => console.log(error));
 
-kingBooksEl.addEventListener('click', e => {
-    const bid = e.target.parentElement.dataset.bookid;
+kingBooksEl.addEventListener('click', (e) => {
+    const tr = e.target.parentElement;
+    const villainsRowEl = document.getElementById("villains-row");
+    
+    if(villainsRowEl && villainsRowEl !== tr) {
+        kingBooksEl.removeChild(villainsRowEl);
+    }
+
+    if (villainsRowEl !== tr) {
+    const bid = tr.dataset.bookid;
     fetch('https://stephen-king-api.onrender.com/api/book/' + bid)
     .then(res => res.json())
-    .then(data => console.log(data))
+    .then((data) => {
+        tr.insertAdjacentHTML(
+            'afterend',
+            `<tr id="villains-row">
+                <td colspan="2">${data.data.Title}</td>
+                <td colspan="4">${data.data.villains.map((villain) => villain.name).join("<br/>")}</td>
+            </tr>`
+        );
+    }) 
     .catch((err) => console.log(err));
+    }
 });
 
