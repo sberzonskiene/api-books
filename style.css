@@ -62,6 +62,7 @@ footer {
 
 #loader {
     position: absolute;
+    padding: 1rem;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -78,4 +79,24 @@ footer {
 
 #villains-row td {
     background: rgb(241, 144, 134);
+}
+
+#modal {
+    background-color: chocolate;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 50px;
+    padding-top: 60px;
+}
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 2rem;
+}
+
+#modal ul {
+    list-style: none;
 }
