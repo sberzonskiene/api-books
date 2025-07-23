@@ -15,38 +15,39 @@ contentEl.classList.add("api-content");
 modalWindow.appendChild(closeBtn);
 modalWindow.appendChild(contentEl);
 
-tableEl.classList.add('hide');
-loaderEl.classList.add('show');
+tableEl.classList.add("hide");
+loaderEl.classList.add("show");
 
-fetch('https://stephen-king-api.onrender.com/api/books')
-.then((resp) => resp.json())
-.then((data) => {
-    loaderEl.classList.remove('show')
-    tableEl.classList.remove('hide')
+fetch("https://stephen-king-api.onrender.com/api/books")
+  .then((resp) => resp.json())
+  .then((data) => {
+    loaderEl.classList.remove("show");
+    tableEl.classList.remove("hide");
     data.data.forEach((book) => {
-        kingBooksEl.insertAdjacentHTML('beforeend', 
-            `<tr data=bookid="${book.id}">
+      kingBooksEl.insertAdjacentHTML(
+        "beforeend",
+        `<tr data-bookid="${book.id}">
                 <td>${book.Title}</td>
                 <td>${book.Year}</td>
                 <td>${book.Publisher}</td>
                 <td>${book.ISBN}</td>
                 <td>${book.Pages}</td>
-                <td>${book.Notes[0] ? book.Notes.join("; ") : 'No aditional notes'}</td>
+                <td>${
+                  book.Notes[0] ? book.Notes.join("; ") : "No additional notes"
+                }</td>
             </tr>`
-        );
+      );
     });
-})
-.catch((error) => console.log(error));
+  })
+  .catch((error) => console.log(error));
 
-kingBooksEl.addEventListener('click', (e) => {
-    const tr = e.target.parentElement;
-    const villainsRowEl = document.getElementById("villains-row");
-    
-    if(villainsRowEl && villainsRowEl !== tr) {
-        kingBooksEl.removeChild(villainsRowEl);
-    }
-
-    if (villainsRowEl != tr) {
+kingBooksEl.addEventListener("click", (e) => {
+  const tr = e.target.parentElement;
+  const villainsRowEl = document.getElementById("villains-row");
+  if (villainsRowEl && villainsRowEl != tr) {
+    kingBooksEl.removeChild(villainsRowEl);
+  }
+  if (villainsRowEl != tr) {
     const bid = tr.dataset.bookid;
     fetch("https://stephen-king-api.onrender.com/api/book/" + bid)
       .then((res) => res.json())
@@ -70,22 +71,23 @@ kingBooksEl.addEventListener('click', (e) => {
               console.log(e.target);
 
               fetch(e.target.href)
-              .then((res) => res.json())
-              .then((data) => { console.log(data);
-                contentEl.innerHTML = `
-                <h2>${data.data.name}</h2>
-                <p>${data.data.status}</p>
-                <ul>${data.data.books.map((book) => `<li>${book.title}</li>`)
-                .join("")}}</ul>
-                `;
-                console.log(contentEl);
-                
-                document.body.appendChild(modalWindow);
-              });
+                .then((res) => res.json())
+                .then((data) => {
+                  console.log(data);
+                  contentEl.innerHTML = `
+                  <h2>${data.data.name}</h2>
+                  <p>${data.data.status}</p>
+                  <ul>${data.data.books
+                    .map((book) => `<li>${book.title}</li>`)
+                    .join("")}</ul>
+                  `;
+                  console.log(contentEl);
+
+                  document.body.appendChild(modalWindow);
+                });
             });
           });
       })
       .catch((err) => console.log(err));
   }
 });
-
