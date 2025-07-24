@@ -77,7 +77,7 @@ kingBooksEl.addEventListener("click", (e) => {
                 .then((data) => {
                   contentEl.innerHTML = `
                   <h2>${data.data.name}</h2>
-                  <p>Status: ${data.data.status === "Deseased" ? '😿' : '😎'}</p>
+                  <p>Status: ${data.data.status === "Deceased" ? '😿' : '😎'}</p>
                   <ul>${data.data.books
                     .map((book) => `<li>${book.title}</li>`)
                     .join("")}</ul>
