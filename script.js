@@ -2,6 +2,9 @@ const kingBooksEl = document.getElementById("king-books");
 const loaderEl = document.getElementById("loader");
 const tableEl = document.getElementById("table");
 
+const blurBg = document.createElement('div');
+blurBg.id = 'blur-bg';
+
 const modalWindow = document.createElement("div");
 modalWindow.id = "modal";
 
@@ -14,6 +17,7 @@ contentEl.classList.add("api-content");
 
 modalWindow.appendChild(closeBtn);
 modalWindow.appendChild(contentEl);
+blurBg.appendChild(modalWindow)
 
 tableEl.classList.add("hide");
 loaderEl.classList.add("show");
@@ -64,30 +68,30 @@ kingBooksEl.addEventListener("click", (e) => {
         const links = Array.from(document.getElementsByTagName("a"));
         links &&
           links.forEach((link) => {
-            // console.log(link.href);
             link.addEventListener("click", (e) => {
               e.stopPropagation();
               e.preventDefault();
-              console.log(e.target);
 
               fetch(e.target.href)
                 .then((res) => res.json())
                 .then((data) => {
-                  console.log(data);
                   contentEl.innerHTML = `
                   <h2>${data.data.name}</h2>
-                  <p>${data.data.status}</p>
+                  <p>Status: ${data.data.status === "Deseased" ? '😿' : '😎'}</p>
                   <ul>${data.data.books
                     .map((book) => `<li>${book.title}</li>`)
                     .join("")}</ul>
                   `;
-                  console.log(contentEl);
 
-                  document.body.appendChild(modalWindow);
+                  document.body.appendChild(blurBg);
                 });
             });
           });
       })
       .catch((err) => console.log(err));
   }
+});
+closeBtn.addEventListener('click', () => document.body.removeChild(blurBg));
+window.addEventListener('keydown', (e) => {
+  e.key === "Escape" && document.body.removeChild(blurBg)
 });
